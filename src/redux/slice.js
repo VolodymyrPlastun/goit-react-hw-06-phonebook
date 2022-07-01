@@ -2,46 +2,35 @@ import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from 'nanoid';
 
 const initialState = {
-// contacts: {
     items: [],
     filter: ''
-//   }
 }
+// { id: 'id-1', userName: 'Rosie Simpson', userNumber: '459-12-56' },
+//     { id: 'id-2', userName: 'Hermione Kline', userNumber: '443-89-12' },
+//     { id: 'id-3', userName: 'Eden Clements', userNumber: '645-17-79' },
+//     { id: 'id-4', userName: 'Annie Copeland', userNumber: '227-91-26' }, 
 
 export const mySlice = createSlice({
     name: "contacts",
     initialState,
     reducers: {
         addContact(state, action) {
-            // console.log(action);
-    const contact = {
-      id: nanoid(),
-      userName: action.payload.userName,
-      userNumber: action.payload.userNumber,
-            }
-             console.log(state.items.userName);
-console.log(contact.userName);
-    if (state.items.userName === contact.userName) {
-return alert(`${state.items.userName} is already in contacts`);
-    } else {
-      state.items = [...state.items, contact]
-    }   
-           
-        // if (state.items.userName.toLowerCase() === action.payload.userName) {
-        //     
-        // }
+
+                        state.items.push({
+                            id: nanoid(),
+                      userName: action.payload.userName,
+                      userNumber: action.payload.userNumber,
+                        });
+                 },
        
-        },
         removeContact(state, action) {
-            
-          return  state.items.filter(item => item.id !== action.payload.id)
-            // state.items.filter(item => console.log(item))
+ return state.items.filter(({id}) => id !== action.payload.id)
         },
-        filterContart(state, action) {
-const normalizedStr = state.filter.toLocaleLowerCase();
-    return state.items.filter(item => item.userName.toLocaleLowerCase().includes(normalizedStr))
+        filterContaсt(state, action) {
+        return action.payload
+
         },
     }
 })
 
-export const { addContact, removeContact, filterContart } = mySlice.actions;
+export const { addContact, removeContact, filterContaсt } = mySlice.actions;
